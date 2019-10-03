@@ -78,12 +78,11 @@ The construction below runs a main animation in a loop, while main animation run
 
 ~~~cpp
 	std::shared_ptr<LoopAnimation> animation = std::make_shared<LoopAnimation>(
-			std::make_shared<ParallelAnimation>(
-				std::make_shared<NumberAnimation>("vehicle.speed", 0, 30, 3000), 
-				std::make_shared<NumberAnimation>("engine.speed", 1, 6.1, 3000, 1)); 
-			),
-			0 /*infinite loops*/
-	);
+		std::make_shared<ParallelAnimation>(
+			std::make_shared<NumberAnimation>("vehicle.speed", 0, 30, 3000), 
+			std::make_shared<NumberAnimation>("engine.speed", 1, 6.1, 3000, 1)); 
+		),
+		0 /*infinite loops*/);
 ~~~
 
 
@@ -93,8 +92,7 @@ Usage example 2
 The construction below runs the EngineSimulation in parallel with a turn indicator simulation.
 
 ~~~cpp
-		std::shared_ptr<ParallelAnimation> animation = std::make_shared<ParallelAnimation>(
-            std::make_shared<EngineSimulation>(), 
-            std::make_shared<NumberSimulation>("turn-indicator-onoff", 1, 0, 10000), // send 1 = turn-indicator-on, sleep 10 sec, send 0 = turn-indicator-off
-        );
+	std::shared_ptr<ParallelAnimation> animation = std::make_shared<ParallelAnimation>(
+		std::make_shared<EngineSimulation>(), 
+		std::make_shared<NumberSimulation>("turn-indicator-onoff", 1, 0, 10000), /* send 1 = turn-indicator-on, sleep 10 sec, send 0 = turn-indicator-off */);
 ~~~
