@@ -43,18 +43,18 @@ public:
 NumberAnimation class
 ---------------------
 
-The NumberAnimation class generates integer values (numbers), covering an input interval, during a specified time frame (seconds). 
+The NumberAnimation class generates integer values (numbers), covering an input interval, during a specified time frame. 
 For example, the code below would notify integer values in the 0-30 interval (0, 1, 2, ..., 30), over a period of 3 seconds (3000 ms).
 
 ~~~cpp
-NumberAnimation numberAnimation(0 /*from*/, 30 /*to*/, 3000 /*duration milliseconds*/);
+NumberAnimation numberAnimation(0 /*from*/, 30 /*to*/, 3000 /*duration in milliseconds*/);
 ~~~
 
 
 ParallelAnimation class
 -----------------------
 
-The ParallelAnimation class runs up to for Animation instances in parallel.
+The ParallelAnimation class runs up to four Animation instances in parallel.
 
 
 LoopAnimation class
@@ -68,13 +68,13 @@ EngineSimulation class
 
 The EngineSimulation class generates "vehicle.speed", "engine.speed" and "gear.shift" events, while accelerating from first gear to sixth, and then decelerating to zero.
 
-The use of Composite Design Pattern in implementating the Animation classes, allows easy implementation of various simulations, as described below.
+The use of Composite Design Pattern in implementing the Animation classes allows easy implementation of various simulations, as presented below.
 
 
 Usage example 1
 ---------------
 
-The construction below runs a main animation in a loop, while main animation runs other animations in parallel. 
+The construction below runs a main animation in a loop, while the main animation runs other animations in parallel. 
 
 ~~~cpp
 std::shared_ptr<LoopAnimation> animation = std::make_shared<LoopAnimation>(
@@ -94,5 +94,5 @@ The construction below runs the EngineSimulation in parallel with a turn indicat
 ~~~cpp
 std::shared_ptr<ParallelAnimation> animation = std::make_shared<ParallelAnimation>(
 	std::make_shared<EngineSimulation>(), 
-	std::make_shared<NumberSimulation>("turn-indicator-onoff", 1, 0, 10000), /* send 1 = turn-indicator-on, sleep 10 seconds, send 0 = turn-indicator-off */);
+	std::make_shared<NumberAnimation>("turn-indicator-onoff", 1, 0, 10000), /* send 1 = turn-indicator-on, sleep 10 seconds, send 0 = turn-indicator-off */);
 ~~~
