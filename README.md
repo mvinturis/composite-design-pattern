@@ -85,7 +85,7 @@ std::shared_ptr<LoopAnimation> animation = std::make_shared<LoopAnimation>(
 	0 /*infinite loops*/);
 /*
 animation.setNotifyValueChangedCallback(
-	std::bind(&ThisClass::onValueChanged, this, std::placeholders::_1, std::placeholders::_2));
+	std::bind(&ThisClass::onAnimationChanged, this, std::placeholders::_1, std::placeholders::_2));
 
 animation.setFinishedCallback(
 	std::bind(&ThisClass::onAnimationFinished, this));
