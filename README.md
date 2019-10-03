@@ -60,7 +60,7 @@ The ParallelAnimation class runs up to for Animation instances in parallel.
 LoopAnimation class
 -------------------
 
-The LoopAnimation class runs an Animation instances in a loop.
+The LoopAnimation class runs an Animation instance in a loop.
 
 
 EngineSimulation class
