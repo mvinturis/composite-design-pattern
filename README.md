@@ -107,7 +107,7 @@ std::shared_ptr<ParallelAnimation> animation = std::make_shared<ParallelAnimatio
 
 animation.setNotifyValueChangedCallback(
 	[](std::string eventName, std::string newValue) {
-		std::cout << eventName.c_str() << " changed " << newValue.c_str() << std::endl;
+		std::cout << eventName.c_str() << " changed: " << newValue.c_str() << std::endl;
 	});
 
 animation.setFinishedCallback(
