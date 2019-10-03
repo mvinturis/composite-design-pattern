@@ -103,7 +103,7 @@ The construction below runs the EngineSimulation in parallel with a turn indicat
 ~~~cpp
 std::shared_ptr<ParallelAnimation> animation = std::make_shared<ParallelAnimation>(
 	std::make_shared<EngineSimulation>(), 
-	std::make_shared<NumberAnimation>("turn-indicator-onoff", 1, 0, 10000), /* send 1 = turn-indicator-on, sleep 10 seconds, send 0 = turn-indicator-off */);
+	std::make_shared<NumberAnimation>("turn-indicator-onoff", 1, 0, 10000) /* send 1 = turn-indicator-on, sleep 10 seconds, send 0 = turn-indicator-off */);
 
 animation.setNotifyValueChangedCallback(
 	[](std::string eventName, std::string newValue) {
