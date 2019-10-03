@@ -14,7 +14,7 @@ Architecture schema
 Animation base class
 --------------------
 
-The Animation base class starts a thread and generates events, which are propagated asynchronously on a callback.
+The Animation base class starts a thread and generates events, which are propagated asynchronous on a callback.
 
 The API of the Animation base class is presented below.
 
