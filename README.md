@@ -14,7 +14,7 @@ Architecture schema
 Animation base class
 --------------------
 
-The Animation base class starts a thread and generates events, which are propagated anynchronously on a callback.
+The Animation base class starts a thread and generates events, which are propagated asynchronous on a callback.
 
 The API of the Animation base class is presented below.
 
@@ -83,6 +83,15 @@ std::shared_ptr<LoopAnimation> animation = std::make_shared<LoopAnimation>(
 		std::make_shared<NumberAnimation>("engine.speed", 1, 6.1, 3000, 1)); 
 	),
 	0 /*infinite loops*/);
+/*
+animation.setNotifyValueChangedCallback(
+	std::bind(&ThisClass::onAnimationChanged, this, std::placeholders::_1, std::placeholders::_2));
+
+animation.setFinishedCallback(
+	std::bind(&ThisClass::onAnimationFinished, this));
+*/
+animation->start();
+animation->waitToFinish();
 ~~~
 
 
@@ -94,5 +103,18 @@ The construction below runs the EngineSimulation in parallel with a turn indicat
 ~~~cpp
 std::shared_ptr<ParallelAnimation> animation = std::make_shared<ParallelAnimation>(
 	std::make_shared<EngineSimulation>(), 
-	std::make_shared<NumberAnimation>("turn-indicator-onoff", 1, 0, 10000), /* send 1 = turn-indicator-on, sleep 10 seconds, send 0 = turn-indicator-off */);
+	std::make_shared<NumberAnimation>("turn-indicator-onoff", 1, 0, 10000) /* send 1 = turn-indicator-on, sleep 10 seconds, send 0 = turn-indicator-off */);
+
+animation.setNotifyValueChangedCallback(
+	[](std::string eventName, std::string newValue) {
+		std::cout << eventName.c_str() << " changed: " << newValue.c_str() << std::endl;
+	});
+
+animation.setFinishedCallback(
+	[]() {
+		std::cout << "The animation finished" << std::endl;
+	});
+
+animation->start();
+animation->waitToFinish();
 ~~~
