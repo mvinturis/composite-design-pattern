@@ -33,7 +33,7 @@ protected:
 	virtual void threadProc()
 	{
 		int interval = getSleepInterval();
-        double increment = getStepIncrement();
+        	double increment = getStepIncrement();
 
 		notifyValue = from;
 
@@ -54,32 +54,32 @@ protected:
 			finished();
 	}
 
-    int getSleepInterval()
-    {
-        double precisionFactor = std::pow(10, precision);
+	int getSleepInterval()
+	{
+		double precisionFactor = std::pow(10, precision);
 
 		if (from == to)
-            return 0;
+			return 0;
 
 		if (from < to)
 			return int((double)duration / ((to - from) * precisionFactor));
 
-        return  int((double)duration / ((from - to) * precisionFactor));
-    }
+		return  int((double)duration / ((from - to) * precisionFactor));
+	}
 
-    double getStepIncrement()
-    {
-        double precisionFactor = std::pow(10, precision);
+	double getStepIncrement()
+	{
+		double precisionFactor = std::pow(10, precision);
 
-        if (from <= to)
-            return 1 / precisionFactor;
-        return -1 / precisionFactor;
-    }
+		if (from <= to)
+	    		return 1 / precisionFactor;
+		return -1 / precisionFactor;
+	}
 
-    double from;
-    double to;
-    double notifyValue;
-    int duration;  // duration in milliseconds 
-    int precision;
+	double from;
+	double to;
+	double notifyValue;
+	int duration;  // duration in milliseconds 
+	int precision;
 
 };
