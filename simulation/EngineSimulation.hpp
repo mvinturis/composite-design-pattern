@@ -67,8 +67,8 @@ protected:
 			parallelAnimation->waitToFinish();
 		}
 
-        if (finished)
-            finished();
+		if (finished)
+			finished();
 	}
 
 	void startNextSimulation()
