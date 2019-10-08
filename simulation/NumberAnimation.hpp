@@ -41,7 +41,7 @@ protected:
 			notifyValueChanged(eventName, std::to_string(notifyValue));
 		notifyValue += increment;
 
-		while (!stop_flag && ((from < to && notifyValue < to) || (from > to && notifyValue > to)))
+		while (!stop_flag && ((from < to && notifyValue <= to) || (from > to && notifyValue => to)))
 		{
 			std::this_thread::sleep_for(std::chrono::milliseconds(interval));
 
