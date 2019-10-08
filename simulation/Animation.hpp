@@ -39,7 +39,7 @@ public:
 	{
 		threadStarted = true;
 		t = std::thread(&Animation::threadProc, this);
-        return 0;
+		return 0;
 	}
 
 	virtual void stop()
