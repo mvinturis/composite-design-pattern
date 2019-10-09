@@ -8,8 +8,8 @@
 #include "ParallelAnimation.hpp"
 #include "Messages.hpp"
 
-#define GEAR_SHIFT_INTERVAL		100
-#define ACCELERATION_INTERVAL	2000
+#define GEAR_SHIFT_INTERVAL		200
+#define ACCELERATION_INTERVAL	3000
 
 class EngineSimulation : public Animation {
 public:
@@ -35,9 +35,6 @@ public:
 	EngineSimulation()
 		: Animation("EngineSimulation")
 		, parallelAnimation(nullptr)
-		, gear(0)
-		, vehicleSpeed(0)
-		, engineSpeed(0)
 		, step(START)
 	{
 	}
@@ -51,6 +48,7 @@ protected:
 	virtual void threadProc()
 	{
 		step = ACCELERATE_FIRST_GEAR;
+
 		startNextSimulation();
 
 		std::unique_lock<std::mutex> lock(animationFinishedMutex);
@@ -76,42 +74,44 @@ protected:
 		switch (step)
 		{
 		case ACCELERATE_FIRST_GEAR:
+			if (notifyValueChanged)
+				notifyValueChanged(GEAR_SHIFT, "1");
 			restartParallelAnimation(0, 30, 1, 6.1, ACCELERATION_INTERVAL);
 			break;
 		case ACCELERATE_SECOND_GEAR:
 			// on shifting gears, we loose a bit of speed and the engine rotation changes
-			restartParallelAnimation(30, 26, 6.1, 2.4, GEAR_SHIFT_INTERVAL, true);
+			restartParallelAnimation(30, 26, 6.1, 3.4, GEAR_SHIFT_INTERVAL, true);
 			if (notifyValueChanged)
 				notifyValueChanged(GEAR_SHIFT, "2");
-			restartParallelAnimation(26, 60, 2.4, 5.6, ACCELERATION_INTERVAL);
+			restartParallelAnimation(26, 60, 3.4, 5.6, ACCELERATION_INTERVAL);
 			break;
 		case ACCELERATE_THIRD_GEAR:
 			// on shifting gears, we loose a bit of speed and the engine rotation changes
-			restartParallelAnimation(60, 56, 5.6, 2.3, GEAR_SHIFT_INTERVAL, true);
+			restartParallelAnimation(60, 56, 5.6, 3.3, GEAR_SHIFT_INTERVAL, true);
 			if (notifyValueChanged)
 				notifyValueChanged(GEAR_SHIFT, "3");
-			restartParallelAnimation(56, 100, 2.3, 5.1, ACCELERATION_INTERVAL);
+			restartParallelAnimation(56, 100, 3.3, 5.1, ACCELERATION_INTERVAL);
 			break;
 		case ACCELERATE_FOURTH_GEAR:
 			// on shifting gears, we loose a bit of speed and the engine rotation changes
-			restartParallelAnimation(100, 96, 5.1, 2.2, GEAR_SHIFT_INTERVAL, true);
+			restartParallelAnimation(100, 96, 5.1, 3.2, GEAR_SHIFT_INTERVAL, true);
 			if (notifyValueChanged)
 				notifyValueChanged(GEAR_SHIFT, "4");
-			restartParallelAnimation(96, 140, 2.2, 6.2, ACCELERATION_INTERVAL);
+			restartParallelAnimation(96, 140, 3.2, 6.2, ACCELERATION_INTERVAL);
 			break;
 		case ACCELERATE_FIFTH_GEAR:
 			// on shifting gears, we loose a bit of speed and the engine rotation changes
-			restartParallelAnimation(140, 136, 6.2, 2.3, GEAR_SHIFT_INTERVAL, true);
+			restartParallelAnimation(140, 136, 6.2, 3.7, GEAR_SHIFT_INTERVAL, true);
 			if (notifyValueChanged)
 				notifyValueChanged(GEAR_SHIFT, "5");
-			restartParallelAnimation(136, 170, 2.3, 4.8, ACCELERATION_INTERVAL);
+			restartParallelAnimation(136, 170, 3.7, 5.8, ACCELERATION_INTERVAL);
 			break;
 		case ACCELERATE_SIXTH_GEAR:
 			// on shifting gears, we loose a bit of speed and the engine rotation changes
-			restartParallelAnimation(170, 169, 4.8, 2.7, GEAR_SHIFT_INTERVAL, true);
+			restartParallelAnimation(170, 169, 5.8, 3.7, GEAR_SHIFT_INTERVAL, true);
 			if (notifyValueChanged)
 				notifyValueChanged(GEAR_SHIFT, "6");
-			restartParallelAnimation(169, 210, 2.7, 5.2, ACCELERATION_INTERVAL);
+			restartParallelAnimation(169, 210, 3.7, 5.2, ACCELERATION_INTERVAL);
 			break;
 		case BREAK_SIXTH_GEAR:
 			// engine break, no gear shifting
@@ -192,10 +192,6 @@ protected:
 	}
 
 	std::shared_ptr<ParallelAnimation> parallelAnimation;
-
-	int gear;
-	double vehicleSpeed;
-	double engineSpeed;
 
 	SimulationStep step;
 

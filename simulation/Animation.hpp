@@ -38,6 +38,7 @@ public:
 	virtual int start()
 	{
 		threadStarted = true;
+		stop_flag = false;
 		t = std::thread(&Animation::threadProc, this);
 		return 0;
 	}
