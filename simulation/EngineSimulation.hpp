@@ -9,7 +9,7 @@
 #include "Messages.hpp"
 
 #define GEAR_SHIFT_INTERVAL		200
-#define ACCELERATION_INTERVAL	3000
+#define ACCELERATION_INTERVAL		3000
 
 class EngineSimulation : public Animation {
 public:
