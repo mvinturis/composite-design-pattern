@@ -1,6 +1,10 @@
 # composite-design-pattern
 
-composite-design-pattern repo contains an example implementation of the Composite Design Pattern. The implementation also uses the Bridge Design Pattern, which makes the source code easy to unit test. 
+composite-design-pattern repo contains an example implementation of the Composite Design Pattern. 
+
+Composite pattern facilitates development of tree structures for representing part-whole hierarchies. In Composite patten, a component can be an individual object and also can be a collection of objects. A leaf has the same interface as a node. 
+
+The implementation here also uses the Bridge Design Pattern, which makes the source code easy to unit test. 
 
 The current use case is implementing an asynchronous simulation library which generates events for an external car simulator service.
 
