@@ -122,3 +122,4 @@ animation.setFinishedCallback(
 animation->start();
 animation->waitToFinish();
 ~~~
+
