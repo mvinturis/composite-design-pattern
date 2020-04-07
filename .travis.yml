@@ -20,8 +20,8 @@ matrix:
       addons:
        apt:
          packages: &precise_latest_boost_packages
-           - gcc-8.3
-           - g++-8.3
+           - gcc-5.4
+           - g++-5.4
            - valgrind
            - python-yaml
            - lcov
