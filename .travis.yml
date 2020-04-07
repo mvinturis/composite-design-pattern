@@ -19,7 +19,7 @@ matrix:
       compiler: gcc
       addons:
        apt:
-         packages &precise_latest_boost_packages
+         packages: &precise_latest_boost_packages
            - gcc-8.3
            - g++-8.3
            - valgrind
