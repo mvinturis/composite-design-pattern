@@ -3,7 +3,7 @@ language: cpp
 env:
   global:
     # Ubuntu version
-    - LINUX_DIST=trusty
+    - LINUX_DIST=disco
     - DEPS_DIR=${TRAVIS_BUILD_DIR}/deps
     # Global build options and C++ flags
     - CXX_FLAGS="-Wall -pedantic -Werror -Wno-variadic-macros -Wno-long-long -Wno-shadow"
@@ -14,14 +14,14 @@ env:
 matrix:
   include:
     - os: linux
-      dist: trusty
+      dist: disco
       sudo: true
-      compiler: gcc
+      compiler: g++
       addons:
        apt:
          packages: &precise_latest_boost_packages
-           - gcc-5.4
-           - g++-5.4
+           - gcc
+           - g++
            - valgrind
            - python-yaml
            - lcov
