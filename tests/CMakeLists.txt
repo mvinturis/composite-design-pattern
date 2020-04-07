@@ -24,3 +24,5 @@ target_link_libraries(
     gmock
     pthread
 )
+
+add_test(UnitTests runUnitTests)
